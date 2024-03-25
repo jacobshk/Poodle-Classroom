@@ -1,0 +1,9 @@
+.root{
+    display:flex;
+    position:fixed;
+    align-items:baseline;
+    height:100%;
+    width:100%;
+    opacity: 0.9;
+    background-image: url("https://source.unsplash.com/random/1920x1080/?vivid_flowers");
+}

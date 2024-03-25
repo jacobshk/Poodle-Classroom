@@ -38,7 +38,7 @@ export default function SClassOverviewNavBar() {
             href="/"
             sx={{ mr: 2 }}
           >
-            <img src="poodle.ico" alt="This is a poodle" width="50" height="50"></img>
+            <img src="../poodle.ico" alt="This is a poodle" width="50" height="50"></img>
           </IconButton>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Poodle Classroom

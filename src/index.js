@@ -20,7 +20,6 @@ import TAssignment from './teacher/TAssignment';
 import TGradebook from './teacher/TGradebook';
 import TPeople from './teacher/TPeople';
 import Welcome from './Welcome'
-import Popup from 'react-popup';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 const classArray = [ 

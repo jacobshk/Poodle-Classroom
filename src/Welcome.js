@@ -1,10 +1,11 @@
 import * as React from 'react';
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
+import { Paper, Card, CardContent, Typography , Box} from '@mui/material';
+import "./welcome.css"
 
 export default function Welcome() {
   return (
     <>
+    <div className='root'>
     <Box sx={{
         marginTop: 20,
         display: 'flex',
@@ -13,10 +14,16 @@ export default function Welcome() {
         width:1,
         height:1,
       }}>
-      <Typography variant="h3" component="div" sx={{ flexGrow: 1}}>
+      <Typography variant="h3" component="div">
             Welcome to Poodle Classroom!
       </Typography>
+      <Typography variant="h5" component="div">
+        Our online learning platform empowers you to explore, grow, and excel!
+      </Typography>
     </Box>
+    
+    </div>
+    
     </>
   );
 }

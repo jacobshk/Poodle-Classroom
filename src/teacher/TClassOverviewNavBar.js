@@ -38,7 +38,7 @@ export default function TClassOverviewNavBar() {
             href="/"
             sx={{ mr: 2 }}
           >
-            <img src="poodle.ico" alt="This is a poodle" width="50" height="50"></img>
+            <img src="../poodle.ico" alt="This is a poodle" width="50" height="50"></img>
           </IconButton>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Poodle Classroom
@@ -61,24 +61,30 @@ export default function TClassOverviewNavBar() {
           },
         }}
       >
-        <DialogTitle>Enroll a class</DialogTitle>
+        <DialogTitle>Create a class</DialogTitle>
         <DialogContent>
+
           <DialogContentText>
-            Please enter your class code.
+            Please enter your class name.
           </DialogContentText>
           <TextField
             autoFocus
             margin="dense"
             id="name"
-            label="Code"
+            label="Class name"
             fullWidth
             variant="standard"
           />
+          <DialogContentText>
+            Your Code: XXXXX
+          </DialogContentText>
         </DialogContent>
+        
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
-          <Button type="submit">Add</Button>
+          <Button type="submit">Create</Button>
         </DialogActions>
+
       </Dialog>
           <IconButton color="inherit">
             <MenuIcon></MenuIcon>
