@@ -11,10 +11,8 @@ import {BrowserRouter, Routes, Route} from 'react-router-dom'
 import reportWebVitals from './reportWebVitals';
 import SGradebook from './student/SGradebook';
 import SAssignment from './student/SAssignment';
-import SCalendar from './student/SCalendar';
 import SClass from './student/SClass';
 import SPeople from './student/SPeople';
-import TCalendar from './teacher/TCalendar';
 import TClass from './teacher/TClass';
 import TAssignment from './teacher/TAssignment';
 import TGradebook from './teacher/TGradebook';
@@ -62,12 +60,10 @@ root.render(
         <Route path="/signin" element={<><NavBar /><SignIn /></>}/>
 
         <Route path="/home/student" element={<><SClassOverviewNavBar /><ClassBox /></>}/>
-        <Route path="/calendar/student" element={<><SCalendar /></>}/>
         
         {allClasses}
 
         <Route path="/home/teacher" element={<><TClassOverviewNavBar /><ClassBox /></>}/>
-        <Route path="/calendar/teacher" element={<><TCalendar /></>}/>
         
       </Routes>
     </BrowserRouter>

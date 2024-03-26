@@ -1,19 +1,7 @@
 import React, { useState } from 'react';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TableSortLabel, Paper } from '@mui/material';
+import { assignmentsData } from '../AssignmentData'; 
 
-function createData(date, name, grade, category) {
-  return { date, name, grade, category };
-}
-
-const rows = [
-  createData('03/15/2024', 'Homework 1', 95, 'HW'),
-  createData('03/20/2024', 'Quiz 1', 87, 'Quiz'),
-  createData('03/22/2024', 'Project 1', 92, 'HW'),
-  createData('03/25/2024', 'Midterm', 88, 'Exam'),
-  // Add more rows as needed
-];
-
-// Utility function for sorting rows
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
     return -1;
@@ -55,25 +43,25 @@ export default function Assignments() {
       <Table>
         <TableHead>
           <TableRow>
-            <TableCell sortDirection={orderBy === 'date' ? order : false}>
+            <TableCell>
               <TableSortLabel
                 active={orderBy === 'date'}
                 direction={orderBy === 'date' ? order : 'asc'}
                 onClick={(e) => handleRequestSort(e, 'date')}
               >
-                Due Date
+                Date
               </TableSortLabel>
             </TableCell>
-            <TableCell sortDirection={orderBy === 'name' ? order : false}>
+            <TableCell>
               <TableSortLabel
-                active={orderBy === 'name'}
-                direction={orderBy === 'name' ? order : 'asc'}
-                onClick={(e) => handleRequestSort(e, 'name')}
+                active={orderBy === 'title'}
+                direction={orderBy === 'title' ? order : 'asc'}
+                onClick={(e) => handleRequestSort(e, 'title')}
               >
-                Assignment
+                Title
               </TableSortLabel>
             </TableCell>
-            <TableCell align="right" sortDirection={orderBy === 'grade' ? order : false}>
+            <TableCell align="right">
               <TableSortLabel
                 active={orderBy === 'grade'}
                 direction={orderBy === 'grade' ? order : 'asc'}
@@ -82,11 +70,11 @@ export default function Assignments() {
                 Grade
               </TableSortLabel>
             </TableCell>
-            <TableCell sortDirection={orderBy === 'category' ? order : false}>
+            <TableCell>
               <TableSortLabel
-                active={orderBy === 'category'}
-                direction={orderBy === 'category' ? order : 'asc'}
-                onClick={(e) => handleRequestSort(e, 'category')}
+                active={orderBy === 'type'}
+                direction={orderBy === 'type' ? order : 'asc'}
+                onClick={(e) => handleRequestSort(e, 'type')}
               >
                 Category
               </TableSortLabel>
@@ -94,13 +82,13 @@ export default function Assignments() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {stableSort(rows, getComparator(order, orderBy))
+          {stableSort(assignmentsData, getComparator(order, orderBy))
             .map((row, index) => (
               <TableRow key={index}>
-                <TableCell component="th" scope="row">{row.date}</TableCell>
-                <TableCell>{row.name}</TableCell>
+                <TableCell>{row.date}</TableCell>
+                <TableCell>{row.title}</TableCell>
                 <TableCell align="right">{row.grade}</TableCell>
-                <TableCell>{row.category}</TableCell>
+                <TableCell>{row.type}</TableCell>
               </TableRow>
             ))}
         </TableBody>

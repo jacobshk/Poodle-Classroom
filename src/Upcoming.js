@@ -13,6 +13,7 @@ const Upcoming = () => {
       {sortedAssignments.map((assignment, index) => (
         <ListItem key={index}>
           <ListItemText
+          // Only shows the first 20 characters of the title.
             primary={`${assignment.title.substring(0, 20)}${assignment.title.length > 20 ? '...' : ''}`}
             secondary={new Date(assignment.date).toLocaleDateString()}
           />
