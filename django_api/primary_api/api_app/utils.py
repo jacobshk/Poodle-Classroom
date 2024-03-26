@@ -20,10 +20,14 @@ def login(username: str, password: str):
     client = pymongo.MongoClient(url)
     db = client['Cluster0']
     user = db['Users'].find_one({'username': username})
+    print(user)
+    print(len(username))
+    print(username)
+
     if user and user['password'] == password:
-        return user
+        return ("account found!")
     else:
-        raise ValueError('account not found')
+        return('account not found')
 
 
 def signup(email, password, username):

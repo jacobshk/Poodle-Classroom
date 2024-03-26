@@ -49,10 +49,10 @@ const trySignUp = async (email, password, username) => {
         * TODO: Replace the console.log with a react pop up
         */
         if(res == "account created successfully"){
-          console.log("SUCCESS")
+          console.log("account created successfully")
         }
         else if (res == "account already exists!"){
-          console.log("No success!")
+          console.log("account already exists!")
         }
         else{
           console.log("Failed! ", res)

@@ -10,6 +10,8 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import axios from 'axios';
+
 
 function Copyright(props) {
   return (
@@ -28,14 +30,48 @@ function Copyright(props) {
 
 const defaultTheme = createTheme();
 
+const tryLogIn = async (username, password) => {
+  
+  await axios
+  .get(
+    'http://127.0.0.1:8000/logIn/',
+    {params:{
+      username: username,
+      password: password
+    }})
+    .then((response)=>{
+      const res = response.data
+      /*
+      * TODO: Replace the console.log with a react pop up
+      */
+      if(res == "account found!"){
+        console.log('success!')
+        let url = '/home/student?username=' + username
+        window.location.href = url
+      }
+      else if (res == "account not found"){
+        console.log(res)
+      }
+      else{
+        console.log("Failed! ", res)
+      }
+    })
+    .catch((error) =>{
+      console.error('Error fetching data:', error);
+    });
+};
+
+
 export default function SignIn() {
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+
+    const email = data.get('email');
+    const password = data.get('password');
+
+    console.log(email, password);
+    await tryLogIn(email, password);
   };
 
   return (
@@ -78,7 +114,6 @@ export default function SignIn() {
               autoComplete="current-password"
             />
             <Button
-              href="/home/student"
               type="submit"
               fullWidth
               variant="contained"

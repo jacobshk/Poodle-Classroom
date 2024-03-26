@@ -40,3 +40,12 @@ def signUp(request):
     username = request.query_params['username']
     temp = signup(email, password, username)
     return Response(temp)
+
+
+# Create your views here.
+@api_view(['GET'])
+def logIn(request):
+    password = request.query_params['password']
+    username = request.query_params['username']
+    temp = login(username, password)
+    return Response(temp)
