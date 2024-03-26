@@ -58,7 +58,7 @@ def signup(email, password, username):
         db['Users'].insert_one(new_user)
         return {'message': 'account created successfully'}
 
-def get_user_classes():
+def get_user_classes(username: str):
     """
     Overview: Retrieves and displays user classes on login.	
     Called when: "Classes Overview" is loaded.	
@@ -69,7 +69,18 @@ def get_user_classes():
     If user is not enrolled in any class, displays ""Not enrolled yet""."	
     CRUD: GET info from class collection
     """
-    pass
+    url = 'mongodb+srv://tk:ilove395@cluster0.5itsxbk.mongodb.net/'
+    client = pymongo.MongoClient(url)
+    db = client['Cluster0']
+    
+    #get user from db
+    if user := db['Users'].find_one({'username': username}):
+        #get class array from db
+        classes = user['classes'] 
+        print(classes)
+        return {'classes': classes}
+
+
 def create_class():
     """
     Overview: Allows teachers to create classes	

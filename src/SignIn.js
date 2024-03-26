@@ -44,12 +44,12 @@ const tryLogIn = async (username, password) => {
       /*
       * TODO: Replace the console.log with a react pop up
       */
-      if(res == "account found!"){
+      if(res === "account found!"){
         console.log('success!')
         let url = '/home/student?username=' + username
         window.location.href = url
       }
-      else if (res == "account not found"){
+      else if (res === "account not found"){
         console.log(res)
       }
       else{

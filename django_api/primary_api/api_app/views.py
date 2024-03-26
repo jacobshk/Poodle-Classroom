@@ -4,7 +4,7 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from .models import Data, user
 from .serializer import DataSerializer
-from.utils import login, signup
+from.utils import login, signup, get_user_classes
 import pymongo
 from pymongo import MongoClient
 import certifi
@@ -48,4 +48,11 @@ def logIn(request):
     password = request.query_params['password']
     username = request.query_params['username']
     temp = login(username, password)
+    return Response(temp)
+
+
+@api_view(['GET'])
+def getUserClasses(request):
+    username = request.query_params['username']
+    temp = get_user_classes(username)
     return Response(temp)

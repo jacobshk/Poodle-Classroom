@@ -2,8 +2,33 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import Link from '@mui/material/Link';
 import './ClassBox.css';
+import axios from 'axios';
 
-export default function AddClassBox() {
+const tryGetClasses = async (username) => {
+  await axios
+  .get(
+    'http://127.0.0.1:8000/getUserClasses/',
+    {params:{
+      username: username
+    }})
+    .then((response)=>{
+      const res = response.data
+      //console.log(res)
+      return(res)
+    })
+    .catch((error) =>{
+      console.error('Error fetching data:', error);
+    });
+};
+
+export default  function AddClassBox() {
+  console.log("Here")
+  let url = window.location.href
+  let username = url.substring(url.indexOf('=')+1, url.length)
+  let temp = tryGetClasses(username)
+  temp.then((out)=>{
+    console.log(out)
+  })
   const classes = [ 
     ['class1', 'teacherName1','classID1'], 
     ['class2', 'teacherName2','classID2'],
