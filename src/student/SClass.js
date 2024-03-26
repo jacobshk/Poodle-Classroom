@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { styled, createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import MuiDrawer from '@mui/material/Drawer';
@@ -17,7 +17,9 @@ import Button from '@mui/material/Button';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import { mainListItems, secondaryListItems } from './listItems';
-import Orders from './Orders';
+import Assignment from './Assignment';
+import Upcoming from '../Upcoming';
+import ClassHeader from '../ClassHeader';
 
 function Copyright(props) {
   return (
@@ -78,7 +80,6 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
   }),
 );
 
-// TODO remove, this demo shouldn't need to reset the theme.
 const defaultTheme = createTheme();
 
 export default function Dashboard() {
@@ -94,7 +95,7 @@ export default function Dashboard() {
         <AppBar position="absolute" open={open}>
           <Toolbar
             sx={{
-              pr: '24px', // keep right padding when drawer closed
+              pr: '24px', 
             }}
           >
             <IconButton
@@ -116,11 +117,9 @@ export default function Dashboard() {
               noWrap
               sx={{ flexGrow: 1 }}
             >
-              Class 1
+              Dashboard
             </Typography>
-
             <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-              
               <Button href="/classID1/class-page/student" color="inherit">Class page</Button>
               <Button href="/classID1/assignments/student" color="inherit">Assignments</Button>
               <Button href="/classID1/gradebook/student" color="inherit">Gradebook</Button>
@@ -165,22 +164,20 @@ export default function Dashboard() {
             <Grid container spacing={3}>
               {/* Class Header */}
               <Grid item xs={12} md={8} lg={20}>
-                <Paper
-                  sx={{
-                    p: 2,
-                    display: 'flex',
-                    flexDirection: 'column',
-                    height: 240,
-                  }}
-                >
-                  
+                  <ClassHeader />  
+              </Grid>
+
+              {/* Upcoming */}
+              <Grid item xs={12} md={4}>
+                <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
+                  <Upcoming />
                 </Paper>
               </Grid>
-              
+
               {/* Assignments */}
-              <Grid item xs={12}>
+              <Grid item xs={12} md={8}>
                 <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-                  <Orders />
+                  <Assignment />
                 </Paper>
               </Grid>
             </Grid>

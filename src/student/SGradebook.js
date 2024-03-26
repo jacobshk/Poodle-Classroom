@@ -18,6 +18,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import { mainListItems, secondaryListItems } from './listItems';
 import Assignments from './Assignments';
+import ClassHeader from '../ClassHeader';
 
 function Copyright(props) {
   return (
@@ -165,16 +166,7 @@ export default function SGradebook() {
             <Grid container spacing={3}>
               {/* Class Header */}
               <Grid item xs={12} md={8} lg={20}>
-                <Paper
-                  sx={{
-                    p: 2,
-                    display: 'flex',
-                    flexDirection: 'column',
-                    height: 100,
-                  }}
-                >
-                  
-                </Paper>
+                <ClassHeader/>
               </Grid>
               
               {/* Assignments */}

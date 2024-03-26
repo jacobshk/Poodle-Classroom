@@ -16,10 +16,11 @@ import Link from '@mui/material/Link';
 import Button from '@mui/material/Button';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import { mainListItems, secondaryListItems } from '../student/listItems';
-import Chart from '../student/Chart';
-import Deposits from '../student/Deposits';
-import Orders from '../student/Orders';
+import { mainListItems, secondaryListItems } from './listItems';
+import ClassHeader from '../ClassHeader';
+import Assignment from './Assignment';
+import Upcoming from '../Upcoming';
+import { assignmentsData } from '../AssignmentData';
 
 function Copyright(props) {
   return (
@@ -83,7 +84,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 // TODO remove, this demo shouldn't need to reset the theme.
 const defaultTheme = createTheme();
 
-export default function TClass() {
+export default function Dashboard() {
   const [open, setOpen] = React.useState(true);
   const toggleDrawer = () => {
     setOpen(!open);
@@ -123,10 +124,10 @@ export default function TClass() {
 
             <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
               
-              <Button href="/classID1/class-page/student" color="inherit">Class page</Button>
-              <Button href="/classID1/assignments/student" color="inherit">Assignments</Button>
-              <Button href="/classID1/gradebook/student" color="inherit">Gradebook</Button>
-              <Button href="/classID1/people/student" color="inherit">People</Button>
+              <Button href="/classID1/class-page/teacher" color="inherit">Class page</Button>
+              <Button href="/classID1/assignments/teacher" color="inherit">Assignments</Button>
+              <Button href="/classID1/gradebook/teacher" color="inherit">Gradebook</Button>
+              <Button href="/classID1/people/teacher" color="inherit">People</Button>
             </Box>
           </Toolbar>
         </AppBar>
@@ -165,36 +166,22 @@ export default function TClass() {
           <Toolbar />
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
             <Grid container spacing={3}>
-              {/* Chart */}
-              <Grid item xs={12} md={8} lg={9}>
-                <Paper
-                  sx={{
-                    p: 2,
-                    display: 'flex',
-                    flexDirection: 'column',
-                    height: 240,
-                  }}
-                >
-                  <Chart />
-                </Paper>
+              {/* Class Header */}
+              <Grid item xs={12} md={8} lg={20}>
+                  <ClassHeader />  
               </Grid>
-              {/* Recent Deposits */}
-              <Grid item xs={12} md={4} lg={3}>
-                <Paper
-                  sx={{
-                    p: 2,
-                    display: 'flex',
-                    flexDirection: 'column',
-                    height: 240,
-                  }}
-                >
-                  <Deposits />
-                </Paper>
-              </Grid>
-              {/* Recent Orders */}
-              <Grid item xs={12}>
+
+              {/* Upcoming */}
+              <Grid item xs={12} md={4}>
                 <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-                  <Orders />
+                  <Upcoming />
+                </Paper>
+              </Grid>
+
+              {/* Assignments */}
+              <Grid item xs={12} md={8}>
+                <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
+                  <Assignment assignmentsData={assignmentsData}/>
                 </Paper>
               </Grid>
             </Grid>
