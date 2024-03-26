@@ -21,7 +21,7 @@ const tryGetClasses = async (username) => {
     });
 };
 
-export default  function AddClassBox() {
+export default function AddClassBox() {
   console.log("Here")
   let url = window.location.href
   let username = url.substring(url.indexOf('=')+1, url.length)
