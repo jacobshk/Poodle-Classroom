@@ -1,58 +1,83 @@
-import * as React from 'react';
-import Box from '@mui/material/Box';
+import React, { useState } from 'react';import Box from '@mui/material/Box';
 import Link from '@mui/material/Link';
 import './ClassBox.css';
 import axios from 'axios';
+import { useEffect } from 'react';
+/*
+function formatClasses(classes){
+  let newArr = []
+  console.log("HERE" + (classes.length))  
+  return(newArr)
+}*/
 
-const tryGetClasses = async (username) => {
-  await axios
-  .get(
-    'http://127.0.0.1:8000/getUserClasses/',
-    {params:{
-      username: username
-    }})
-    .then((response)=>{
-      const res = response.data
-      //console.log(res)
-      return(res)
-    })
-    .catch((error) =>{
-      console.error('Error fetching data:', error);
+
+async function tryGetClasses (username) {
+  //EITHER use try / await OR .then / .catch NOT BOTH
+  try{
+    const response = await axios.get('http://127.0.0.1:8000/getUserClasses/',{
+      params:{
+        username: username
+      }
     });
+    const res = response.data['response']
+
+    const classes = Object.values(res)
+    //classes is an array of objects with keys correspodnign to the objs in views.py / get_user_classes
+   
+    return(classes)
+  }
+  catch(error){
+    console.log("something went wrong! " + error)
+    return([])
+  }
 };
 
 export default function AddClassBox() {
-  console.log("Here")
-  let url = window.location.href
-  let username = url.substring(url.indexOf('=')+1, url.length)
-  let temp = tryGetClasses(username)
-  temp.then((out)=>{
-    console.log(out)
-  })
-  const classes = [ 
-    ['class1', 'teacherName1','classID1'], 
-    ['class2', 'teacherName2','classID2'],
-  ]
+  const [addedClasses, setAddedClasses] = useState([]);
   
-  const addedClasses = []
-  
-  classes.forEach((item) => {
-    const string = "/" + item[2] + "/class-page/student"
-    addedClasses.push(<div class="main-container">
-    <div class="top-container">
-        <div class="top-text">
-            <Link href={string} color="inherit" underline="none">
-                {item[0]}
-            </Link>
-        </div>
-    </div>
-    <div class="bottom-container"> 
-        <div class="bottom-text">
-            {item[1]}
-        </div>
-    </div>
-</div>)
-  });
+
+  useEffect(() => {
+    console.log("Here")
+    let url = window.location.href
+    let username = url.substring(url.indexOf('=')+1, url.length)
+
+    const fetchClasses = async ()=>{
+      try {
+        const tempClasses = await tryGetClasses(username)
+        let updatedClasses= []
+        tempClasses.forEach((item) => {
+    
+          const string = "/" + item['class_id'] + "/class-page/student"
+          updatedClasses.push(<div className="main-container">
+          <div className="top-container">
+              <div className="top-text">
+                  <Link href={string} color="inherit" underline="none">
+                      {item['class_name']}
+                  </Link>
+              </div>
+          </div>
+          <div className="bottom-container"> 
+              <div className="bottom-text">
+                  {item['teacher_name']}
+              </div>
+          </div>
+        </div>)
+        });
+      
+
+        console.log("Updated classes:" +(updatedClasses))
+        setAddedClasses(updatedClasses);
+      }
+      catch(error){
+        console.log("Something went wrong: " + error)
+      }
+    } 
+
+    fetchClasses();
+
+  }, []);
+  //because of the arr as a 2nd arg, only runs on initial render: https://react.dev/learn/synchronizing-with-effects
+
 
 
   return (
@@ -66,8 +91,7 @@ export default function AddClassBox() {
       sx={{ flexWrap: 'wrap'}}
     >
       
-    {addedClasses}
-    
+      {addedClasses}    
     </Box>
     
   );

@@ -55,4 +55,19 @@ def logIn(request):
 def getUserClasses(request):
     username = request.query_params['username']
     temp = get_user_classes(username)
-    return Response(temp)
+    """
+    Classes should be an array of objects of shape:
+        ['class1', 'teacherName1','classID1'], 
+        per github
+    """
+    res = []
+    for i in temp:
+        obj = {
+            'class_name':i['class_name'],
+            'teacher_name':i['teacher_emails'][0],
+            'class_ID': i['class_id']
+            }
+        res.append(obj)
+    
+    print(res)
+    return Response({'response': res})

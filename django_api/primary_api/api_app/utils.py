@@ -77,8 +77,14 @@ def get_user_classes(username: str):
     if user := db['Users'].find_one({'username': username}):
         #get class array from db
         classes = user['classes'] 
-        print(classes)
-        return {'classes': classes}
+        #get each class object from db 
+        class_obj_arr = []
+        for i in range(len(classes)):
+            classID = classes[i]
+            class_obj = db['Classes'].find_one({'class_id': classID},{'_id': False})
+            class_obj_arr.append(class_obj)
+        print(class_obj_arr)
+        return class_obj_arr
 
 
 def create_class():
