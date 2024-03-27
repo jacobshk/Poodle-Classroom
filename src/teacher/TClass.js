@@ -18,7 +18,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import { mainListItems, secondaryListItems } from './listItems';
 import ClassHeader from '../ClassHeader';
-import Assignment from './Assignment';
+import Assignment from '../student/Assignment';
 import Upcoming from '../Upcoming';
 import { assignmentsData } from '../AssignmentData';
 

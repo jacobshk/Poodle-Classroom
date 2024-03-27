@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Paper, Typography, Box, Dialog, DialogTitle, DialogContent, TextField, Button, IconButton, DialogActions } from '@mui/material';
+import { Paper, Typography, Box, Dialog, DialogTitle, DialogContent, TextField, Button, IconButton, DialogActions, MenuItem } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { assignmentsData } from '../AssignmentData';
 
@@ -7,6 +7,9 @@ export default function Assignment() {
   const [open, setOpen] = useState(false);
   const [editableAssignment, setEditableAssignment] = useState(null);
   const [deleteConfirmationOpen, setDeleteConfirmationOpen] = useState(false);
+
+  // Predefined categories for the dropdown
+  const categories = ['Homework', 'Project', 'Test', 'Exam', 'Quiz'];
 
   const handleClickOpen = (assignment) => {
     setEditableAssignment({ ...assignment });
@@ -52,18 +55,16 @@ export default function Assignment() {
     <Box sx={{ padding: 2 }}>
       <Typography variant="h6" gutterBottom>Assignments Feed</Typography>
       {assignmentsData.map((assignment, index) => (
-        <Paper key={index} elevation={3} sx={{ marginBottom: 2, padding: 2 }} onClick={() => handleClickOpen(assignment)}>
-          <Box sx={{ cursor: 'pointer' }}>
-            <Typography variant="subtitle1">
-                {assignment.title}
-                </Typography>
-            <Typography variant="body2" sx={{ marginLeft: 2 }}>
-                Due: {assignment.date}
-                </Typography>
-            <Typography variant="body2" sx={{ marginTop: 1 }}>
-                {assignment.description.substring(0, 100)}...
-                </Typography>
-          </Box>
+          <Paper key={index} elevation={3} sx={{ marginBottom: 2, padding: 2, cursor: 'pointer' }} onClick={() => handleClickOpen(assignment)}>
+          <Typography variant="h7" component="span">
+            {assignment.title}
+          </Typography>
+          <Typography variant="body2" component="span" sx={{ marginLeft: 2 }}>
+            Due: {assignment.date}
+          </Typography>
+          <Typography variant="body2" display="block" sx={{ marginTop: 1 }}>
+            {assignment.description.substring(0, 100)}...
+          </Typography>
         </Paper>
       ))}
       {editableAssignment && (
@@ -84,22 +85,28 @@ export default function Assignment() {
               margin="dense"
               name="date"
               label="Due Date"
-              type="text"
+              type="date"
               fullWidth
               variant="outlined"
               value={editableAssignment.date}
               onChange={handleChange}
             />
             <TextField
-              margin="dense"
-              name="type"
-              label="Type"
-              type="text"
-              fullWidth
-              variant="outlined"
-              value={editableAssignment.type}
-              onChange={handleChange}
-            />
+                  select
+                  fullWidth
+                  label="Type"
+                  name="type"
+                  variant="outlined"
+                  margin="dense"
+                  value={editableAssignment.type}
+                  onChange={handleChange}
+                >
+                  {categories.map((category, index) => (
+                    <MenuItem key={index} value={category}>
+                      {category}
+                    </MenuItem>
+                  ))}
+            </TextField>
             <TextField
               margin="dense"
               name="description"
@@ -110,6 +117,10 @@ export default function Assignment() {
               variant="outlined"
               value={editableAssignment.description}
               onChange={handleChange}
+              inputProps={{
+                maxLength: 250,
+              }}
+              helperText="Maximum 250 characters"
             />
             <TextField
               margin="dense"

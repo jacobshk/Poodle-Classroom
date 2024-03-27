@@ -1,127 +1,122 @@
-import React from 'react';
-import { createTheme, ThemeProvider, Container, CssBaseline, Box, Typography, TextField, Button, Grid, Avatar, MenuItem, ListItemIcon } from '@mui/material';
+import React, { useState } from 'react';
+import {
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+  TextField,
+  Button,
+  Grid,
+  MenuItem,
+  CssBaseline,
+  createTheme,
+  ThemeProvider
+} from '@mui/material';
 import ClassIcon from '@mui/icons-material/Class';
 
 const defaultTheme = createTheme();
 
 export default function CreateAssignment() {
+  const [open, setOpen] = useState(true);
+
+  // Categories for the dropdown
+  const categories = ['Homework', 'Project', 'Test', 'Exam', 'Quiz'];
+
+  // Handle form submission
   const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      assignmentName: data.get('assignmentName'),
-      category: data.get('category'),
-      dateDue: data.get('dateDue'),
-      points: data.get('points'),
-      description: data.get('description'),
-    });
+    event.preventDefault(); 
+    console.log("Dialog should submit now.");
+    handleClose();
   };
 
-  /* Common Categories for the dropdown */
-  const categories = ['Homework', 'Project', 'Test', 'Exam', 'Quiz'];
+  // Close dialog
+  const handleClose = () => {
+    setOpen(false);
+    console.log("Dialog should close now.");
+  };
 
   return (
     <ThemeProvider theme={defaultTheme}>
       <CssBaseline />
-      <Container component="main" sx={{ width: '840px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: 2 }}>
-        <Box
-          sx={{
-            width: '50%', 
-            marginTop: 8,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            backgroundColor: 'background.paper', 
-            borderRadius: 3, 
-          }}
-        >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-            <ClassIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            Create Assignment
-          </Typography>
-           {/* The Actual form code  */}
-          <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3, width: '100%' }}>
+      <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
+        <DialogTitle id="form-dialog-title">
+          <ClassIcon /> Create Assignment
+        </DialogTitle>
+        <form onSubmit={handleSubmit}>
+          <DialogContent>
             <Grid container spacing={2}>
-              <Grid item xs={6}>
+              <Grid item xs={12}>
                 <TextField
                   autoComplete="assignment-name"
                   name="assignmentName"
                   required
                   fullWidth
-                  id="assignmentName"
                   label="Assignment Name"
-                />
-              </Grid>
-              <Grid item xs={6}>
-                <TextField
-                  select
-                  required
-                  fullWidth
-                  id="category"
-                  label="Category"
-                  name="category"
                   defaultValue=""
-                >
-                  {categories.map((category, index) => (
-                    <MenuItem key={index} value={category}>
-                      {category}
-                    </MenuItem>
-                  ))}
-                </TextField>
+                />
               </Grid>
               <Grid item xs={12}>
                 <TextField
-                  required
-                  fullWidth
-                  id="description"
-                  label="Description"
-                  name="description"
-                  multiline
-                  rows={4}
-                  inputProps={{
-                    maxLength: 250,
-                  }}
-                  helperText="Maximum 250 characters"
-                />
+                select
+                required
+                fullWidth
+                label="Category"
+                name="category"
+                defaultValue=""
+              >
+                {categories.map((category, index) => (
+                  <MenuItem key={index} value={category}>
+                    {category}
+                  </MenuItem>
+                ))}
+              </TextField>
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                required
+                fullWidth
+                label="Description"
+                name="description"
+                multiline
+                rows={4}
+                defaultValue=""
+                inputProps={{
+                  maxLength: 250,
+                }}
+                helperText="Maximum 250 characters"
+              />
               </Grid>
               <Grid item xs={6}>
                 <TextField
-                  required
-                  fullWidth
-                  id="points"
-                  label="Points"
-                  name="points"
-                  type="number"
-                  autoComplete="points"
-                />
+                required
+                fullWidth
+                label="Points"
+                name="points"
+                type="number"
+                defaultValue=""
+              />
               </Grid>
               <Grid item xs={6}>
                 <TextField
-                  required
-                  fullWidth
-                  id="dateDue"
-                  label="Date Due"
-                  name="dateDue"
-                  type="date"
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                />
+                required
+                fullWidth
+                label="Date Due"
+                name="dateDue"
+                type="date"
+                defaultValue=""
+                InputLabelProps={{
+                  shrink: true,
+                }}
+              />
               </Grid>
             </Grid>
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-            >
-              Submit Assignment
-            </Button>
-          </Box>
-        </Box>
-      </Container>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleClose} color="primary">Cancel</Button>
+            <Button type="submit" color="primary" variant="contained">Submit</Button>
+          </DialogActions>
+        </form>
+      </Dialog>
     </ThemeProvider>
   );
 }
