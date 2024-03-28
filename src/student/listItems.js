@@ -6,6 +6,25 @@ import ListItemText from '@mui/material/ListItemText';
 import ListSubheader from '@mui/material/ListSubheader';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import AssignmentIcon from '@mui/icons-material/Assignment';
+import {classData} from "../Data.js"
+
+
+
+const addedClasses = []
+  
+classData.forEach((item) => {
+    const string = "/" + item.classID + "/class-page/student"
+    addedClasses.push(
+      <ListItemButton href={string}>
+      <ListItemIcon>
+        <AssignmentIcon />
+      </ListItemIcon>
+      <ListItemText primary={item.className} />
+    </ListItemButton>
+    );
+  });
+
+
 
 export const mainListItems = (
   <React.Fragment>
@@ -23,23 +42,6 @@ export const secondaryListItems = (
     <ListSubheader component="div" inset>
       Enrolled Classes
     </ListSubheader>
-    <ListItemButton>
-      <ListItemIcon>
-        <AssignmentIcon />
-      </ListItemIcon>
-      <ListItemText primary="Class 1" />
-    </ListItemButton>
-    <ListItemButton>
-      <ListItemIcon>
-        <AssignmentIcon />
-      </ListItemIcon>
-      <ListItemText primary="Class 2" />
-    </ListItemButton>
-    <ListItemButton>
-      <ListItemIcon>
-        <AssignmentIcon />
-      </ListItemIcon>
-      <ListItemText primary="Class 3" />
-    </ListItemButton>
+    {addedClasses}
   </React.Fragment>
 );

@@ -11,6 +11,7 @@ export default function Assignment() {
   // Predefined categories for the dropdown
   const categories = ['Homework', 'Project', 'Test', 'Exam', 'Quiz'];
 
+  
   const handleClickOpen = (assignment) => {
     setEditableAssignment({ ...assignment });
     setOpen(true);

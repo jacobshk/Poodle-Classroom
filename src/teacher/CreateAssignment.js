@@ -22,6 +22,7 @@ export default function CreateAssignment() {
   // Categories for the dropdown
   const categories = ['Homework', 'Project', 'Test', 'Exam', 'Quiz'];
 
+  
   // Handle form submission
   const handleSubmit = (event) => {
     event.preventDefault(); 

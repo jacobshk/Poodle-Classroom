@@ -18,25 +18,22 @@ import TAssignment from './teacher/TAssignment';
 import TGradebook from './teacher/TGradebook';
 import TPeople from './teacher/TPeople';
 import Welcome from './Welcome'
+import {classData} from "./Data.js"
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-const classArray = [ 
-  ['class1', 'teacherName1','classID1'], 
-  ['class2', 'teacherName2','classID2'],
-  ['class3', 'teacherName3','classID3']
-]
 
 const allClasses = []
 
-classArray.forEach((item) => {
-  const scp = "/"+ item[2] + "/class-page/student";
-  const sas = "/"+ item[2] + "/assignments/student";
-  const sgb = "/"+ item[2] + "/gradebook/student";
-  const spe = "/"+ item[2] + "/people/student";
-  const tcp = "/"+ item[2] + "/class-page/teacher";
-  const tas = "/"+ item[2] + "/assignments/teacher";
-  const tgb = "/"+ item[2] + "/gradebook/teacher";
-  const tpe = "/"+ item[2] + "/people/teacher";
+
+classData.forEach((item) => {
+  const scp = "/"+ item.classID + "/class-page/student";
+  const sas = "/"+ item.classID + "/assignments/student";
+  const sgb = "/"+ item.classID + "/gradebook/student";
+  const spe = "/"+ item.classID + "/people/student";
+  const tcp = "/"+ item.classID + "/class-page/teacher";
+  const tas = "/"+ item.classID + "/assignments/teacher";
+  const tgb = "/"+ item.classID + "/gradebook/teacher";
+  const tpe = "/"+ item.classID + "/people/teacher";
   allClasses.push(<>
     <Route path={scp} element={<><SClass /></>}/>
     <Route path={sas} element={<><SAssignment /></>}/>

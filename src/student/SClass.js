@@ -88,6 +88,7 @@ export default function Dashboard() {
     setOpen(!open);
   };
 
+  
   return (
     <ThemeProvider theme={defaultTheme}>
       <Box sx={{ display: 'flex' }}>
@@ -117,13 +118,13 @@ export default function Dashboard() {
               noWrap
               sx={{ flexGrow: 1 }}
             >
-              Dashboard
+              Class 1
             </Typography>
             <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-              <Button href="/classID1/class-page/student" color="inherit">Class page</Button>
-              <Button href="/classID1/assignments/student" color="inherit">Assignments</Button>
-              <Button href="/classID1/gradebook/student" color="inherit">Gradebook</Button>
-              <Button href="/classID1/people/student" color="inherit">People</Button>
+              <Button href="/12345/class-page/student" color="inherit">Class page</Button>
+              <Button href="/12345/assignments/student" color="inherit">Assignments</Button>
+              <Button href="/12345/gradebook/student" color="inherit">Gradebook</Button>
+              <Button href="/12345/people/student" color="inherit">People</Button>
             </Box>
           </Toolbar>
         </AppBar>

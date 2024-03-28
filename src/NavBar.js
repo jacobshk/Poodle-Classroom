@@ -6,6 +6,7 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 
+
 export default function NavBar() {
   return (
     <Box sx={{ flexGrow: 1 }}>

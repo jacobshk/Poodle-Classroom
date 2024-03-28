@@ -1,12 +1,12 @@
 import * as React from 'react';
-import { Unstable_Popup as BasePopup } from '@mui/base/Unstable_Popup';
-import { styled } from '@mui/system';
+/* import { Unstable_Popup as BasePopup } from '@mui/base/Unstable_Popup'; */
+/* import { styled } from '@mui/system'; */
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
+/* import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox'; */
 import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
@@ -15,6 +15,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import axios from 'axios';
+
 
 
 function Copyright(props) {
@@ -50,11 +51,11 @@ const trySignUp = async (email, password, username) => {
         /*
         * TODO: Replace the console.log with a react pop up
         */
-        if(res == "account created successfully"){
-          console.log("account created successfully")
+        if(res === "account created successfully"){
+          alert("SUCCESSFUL");
         }
-        else if (res == "account already exists!"){
-          console.log("account already exists!")
+        else if (res === "account already exists!"){
+          alert("Not Successful");
         }
         else{
           console.log("Failed! ", res)
@@ -64,7 +65,7 @@ const trySignUp = async (email, password, username) => {
         console.error('Error fetching data:', error);
       });
 };
-const grey = {
+/* const grey = {
   50: '#F3F6F9',
   100: '#E5EAF2',
   200: '#DAE2ED',
@@ -104,7 +105,7 @@ const PopupBody = styled('div')(
   font-size: 0.875rem;
   z-index: 1;
 `,
-);
+); */
 
 export default function SignUp() {
   
@@ -125,8 +126,8 @@ export default function SignUp() {
     setAnchor(anchor ? null : event.currentTarget);
   };
 
-  const open = Boolean(anchor);
-  const id = open ? 'simple-popper' : undefined;
+  /* const open = Boolean(anchor);
+  const id = open ? 'simple-popper' : undefined; */
 
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -190,9 +191,9 @@ export default function SignUp() {
             >
               Sign Up
             </Button>
-            <BasePopup id={id} open={open} anchor={anchor}>
-              <PopupBody>The content of the Popup.</PopupBody>
-            </BasePopup>
+            {/* <BasePopup id={id} open={open} anchor={anchor}>
+              <PopupBody className="popup"></PopupBody>
+            </BasePopup> */}
 
             <Grid container justifyContent="flex-end">
               <Grid item>

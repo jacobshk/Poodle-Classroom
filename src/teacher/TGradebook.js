@@ -122,10 +122,11 @@ export default function TGradebook() {
 
             <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
               
-              <Button href="/classID1/class-page/teacher" color="inherit">Class page</Button>
-              <Button href="/classID1/assignments/teacher" color="inherit">Assignments</Button>
-              <Button href="/classID1/gradebook/teacher" color="inherit">Gradebook</Button>
-              <Button href="/classID1/people/teacher" color="inherit">People</Button>
+              <Button href="/12345/class-page/teacher" color="inherit">Class page</Button>
+              <Button href="/12345/assignments/teacher" color="inherit">Assignments</Button>
+              <Button href="/12345/gradebook/teacher" color="inherit">Gradebook</Button>
+              <Button href="/12345/people/teacher" color="inherit">People</Button>
+            
             </Box>
           </Toolbar>
         </AppBar>

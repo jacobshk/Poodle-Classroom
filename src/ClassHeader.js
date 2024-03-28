@@ -15,6 +15,7 @@ export default function ClassHeader() {
     }
   }, [location]);
 
+  
   return (
       <Paper
         sx={{
