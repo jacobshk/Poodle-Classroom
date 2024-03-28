@@ -82,6 +82,28 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 
 const defaultTheme = createTheme();
 
+
+//replace 'class-page' with 'assignments'
+function toAssignments(){
+  let currentUrl = (window.location.href)
+  const newUrl = currentUrl.replace('class-page', 'assignments')
+  window.location.href = newUrl
+}
+
+//replace 'class-page' with 'gradebook'
+function toGradebook(){
+  let currentUrl = (window.location.href)
+  const newUrl = currentUrl.replace('class-page', 'gradebook')
+  window.location.href = newUrl
+}
+
+//replace 'class-page' with 'people'
+function toPeople(){
+  let currentUrl = (window.location.href)
+  const newUrl = currentUrl.replace('class-page', 'people')
+  window.location.href = newUrl
+}
+
 export default function Dashboard() {
   const [open, setOpen] = React.useState(true);
   const toggleDrawer = () => {
@@ -120,10 +142,10 @@ export default function Dashboard() {
               Dashboard
             </Typography>
             <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-              <Button href="/classID1/class-page/student" color="inherit">Class page</Button>
-              <Button href="/classID1/assignments/student" color="inherit">Assignments</Button>
-              <Button href="/classID1/gradebook/student" color="inherit">Gradebook</Button>
-              <Button href="/classID1/people/student" color="inherit">People</Button>
+              <Button  color="inherit">Class page</Button>
+              <Button onClick={toAssignments} color="inherit">Assignments</Button>
+              <Button onClick={toGradebook} color="inherit">Gradebook</Button>
+              <Button onClick={toPeople} color="inherit">People</Button>
             </Box>
           </Toolbar>
         </AppBar>
