@@ -22,6 +22,7 @@ async function tryGetClasses (username) {
     const res = response.data['response']
 
     const classes = Object.values(res)
+    
     //classes is an array of objects with keys correspodnign to the objs in views.py / get_user_classes
    
     return(classes)
@@ -47,7 +48,7 @@ export default function AddClassBox() {
         let updatedClasses= []
         tempClasses.forEach((item) => {
     
-          const string = "/" + item['class_id'] + "/class-page/student"
+          const string = "/class-page/student/?username=" + username +"&class_id=" + item['class_ID']
           updatedClasses.push(<div className="main-container">
           <div className="top-container">
               <div className="top-text">

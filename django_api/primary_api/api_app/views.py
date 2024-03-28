@@ -4,7 +4,7 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from .models import Data, user
 from .serializer import DataSerializer
-from.utils import login, signup, get_user_classes
+from.utils import login, signup, get_user_classes, join_class
 import pymongo
 from pymongo import MongoClient
 import certifi
@@ -70,4 +70,17 @@ def getUserClasses(request):
         res.append(obj)
     
     print(res)
+    return Response({'response': res})
+
+
+@api_view(['GET'])
+def joinClass(request):
+    username = request.query_params['username']
+    class_id = request.query_params['class_id']
+    """    
+    Classes should be an array of objects of shape:
+        ['class1', 'teacherName1','classID1'], 
+        per github
+    """
+    res = join_class(username, class_id)
     return Response({'response': res})

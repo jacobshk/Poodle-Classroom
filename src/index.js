@@ -27,7 +27,7 @@ const classArray = [
 ]
 
 const allClasses = []
-
+/*
 classArray.forEach((item) => {
   const scp = "/"+ item[2] + "/class-page/student";
   const sas = "/"+ item[2] + "/assignments/student";
@@ -50,6 +50,7 @@ classArray.forEach((item) => {
     </>
   );
 });
+*/
 
 root.render(
   <React.StrictMode>
@@ -60,9 +61,15 @@ root.render(
         <Route path="/signin" element={<><NavBar /><SignIn /></>}/>
 
         <Route path="/home/student" element={<><SClassOverviewNavBar /><ClassBox /></>}/>
-        
-        {allClasses}
+    <Route path={"/class-page/student"} element={<><SClass /></>}/>
+    <Route path={"/assignments/student"} element={<><SAssignment /></>}/>
+    <Route path={"/gradebook/student"} element={<><SGradebook /></>}/>
+    <Route path={ "/people/student"} element={<><SPeople /></>}/> 
 
+    <Route path={ "/class-page/teacher"} element={<><TClass /></>}/>
+    <Route path={"/assignments/teacher"} element={<><TAssignment /></>}/>
+    <Route path={"/gradebook/teacher"} element={<><TGradebook /></>}/>
+    <Route path={"/people/teacher"} element={<><TPeople /></>}/>
         <Route path="/home/teacher" element={<><TClassOverviewNavBar /><ClassBox /></>}/>
         
       </Routes>

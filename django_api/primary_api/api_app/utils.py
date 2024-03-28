@@ -83,7 +83,7 @@ def get_user_classes(username: str):
             classID = classes[i]
             class_obj = db['Classes'].find_one({'class_id': classID},{'_id': False})
             class_obj_arr.append(class_obj)
-        print(class_obj_arr)
+        #print(class_obj_arr)
         return class_obj_arr
 
 
@@ -101,7 +101,7 @@ def create_class():
     pass
 
 
-def join_class():
+def join_class(username: str, class_id: int):
     """
     Overview: Allows students to enroll in classes	
     Called when: user inputs a Class ID and hits enter	
@@ -113,7 +113,33 @@ def join_class():
         If user is in class, displays error message"	
     CRUD: PUT info to class collection
     """
-    pass
+    url = 'mongodb+srv://tk:ilove395@cluster0.5itsxbk.mongodb.net/'
+    client = pymongo.MongoClient(url)
+    db = client['Cluster0']
+    
+    class_id = int(class_id)
+    #get user from db
+    if userClass := db['Classes'].find_one({'class_id': class_id}):
+        #get each class object from db 
+        students = userClass['student_emails']
+        print(username)
+        print(students)
+        for i in students:
+            email = i.split('@')[0]
+            print(email)
+            if(email == username):
+                return({'response': 'already joined'})
+
+        #update class membership            
+        update_result = db['Classes'].update_one({'class_id': class_id}, {"$push": {"student_emails": username+'@gmu.edu'}})
+        #update user membership
+        update_result2 = db['Users'].update_one({'username': username}, {"$push": {"classes": class_id}})
+
+
+        return({'response': 'successfully added'})
+
+    else:
+        return({'response': "no class found"})
 
 def get_roster():
      """

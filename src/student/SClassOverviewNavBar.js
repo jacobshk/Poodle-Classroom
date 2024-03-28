@@ -13,9 +13,33 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
+import axios from 'axios';
+import { useState } from 'react';
+
+async function tryJoinClass (username, class_id) {
+  //EITHER use try / await OR .then / .catch NOT BOTH
+  try{
+    const response = await axios.get('http://127.0.0.1:8000/joinClass/',{
+      params:{
+        username: username,
+        class_id: class_id
+      }
+    });
+    const res = response.data['response']
+    //classes is an array of objects with keys correspodnign to the objs in views.py / get_user_classes
+   
+    return(res)
+  }
+  catch(error){
+    console.log("something went wrong! " + error)
+    return([])
+  }
+};
+
 
 export default function SClassOverviewNavBar() {
   const [open, setOpen] = React.useState(false);
+  const [classCode, setClassCode] = useState('');
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -23,6 +47,27 @@ export default function SClassOverviewNavBar() {
 
   const handleClose = () => {
     setOpen(false);
+  };
+
+  function handleSubmit(e){
+    //should try to add student to DB and display appropriate msg
+    e.preventDefault();
+    
+    //TODO: Handle form validation
+    console.log(classCode)
+
+    let url = window.location.href
+    let username = url.substring(url.indexOf('=')+1, url.length)
+
+    const t = async ()=>{
+      let temp = await tryJoinClass(username, classCode)
+      console.log(temp)
+    }
+    t()
+  };
+
+  const handleInputChange = (event) => {
+    setClassCode(event.target.value);
   };
 
   return (
@@ -46,22 +91,17 @@ export default function SClassOverviewNavBar() {
           <IconButton color="inherit" onClick={handleClickOpen}>
             <AddIcon></AddIcon>
       </IconButton >
+
+      
+      <form method="post" onSubmit={handleSubmit}>
       <Dialog
         open={open}
         onClose={handleClose}
         PaperProps={{
           component: 'form',
-          onSubmit: (event) => {
-            event.preventDefault();
-            const formData = new FormData(event.currentTarget);
-            const formJson = Object.fromEntries(formData.entries());
-            const email = formJson.email;
-            console.log(email);
-            handleClose();
-          },
         }}
       >
-        <DialogTitle>Enroll a class</DialogTitle>
+        <DialogTitle>Enroll in a class</DialogTitle>
         <DialogContent>
           <DialogContentText>
             Please enter your class code.
@@ -69,10 +109,12 @@ export default function SClassOverviewNavBar() {
           <TextField
             autoFocus
             margin="dense"
-            id="name"
+            id="classCode"
             label="Code"
             fullWidth
             variant="standard"
+            value={classCode}
+            onChange={handleInputChange}
           />
         </DialogContent>
         <DialogActions>
@@ -80,6 +122,7 @@ export default function SClassOverviewNavBar() {
           <Button type="submit">Add</Button>
         </DialogActions>
       </Dialog>
+      </form>
           <IconButton color="inherit">
             <MenuIcon></MenuIcon>
           </IconButton>
